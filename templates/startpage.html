@@ -1,0 +1,12 @@
+<html>
+  <body>
+    {% if answer %}
+    Die Koordinaten sind {{ coordinates }} <br>
+    Antwort ist {{ answer }} <br>
+    {%endif%}
+    <a  href ="/bild">
+      {% load static %}
+      <img src="{% static "ubung/ohr.jpg" %}" alt="My image" ismap/>
+    </a>
+  </body>
+</html>

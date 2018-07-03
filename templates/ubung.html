@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %} Lernen {% endblock %}
+{% block content %}
+<style>
+
+@media screen and (max-height: 450px){
+  .vert {padding-top:15px;}
+  .vert a {font-size:18px;}
+  .vert {padding-right: 150px;}
+}
+
+
+
+</style>
+
+
+
+<form action="/ubung/{{ gleich}}" method="GET">
+
+   <h1>  {{ question.uberschrift }} </h1>
+   <div  class = "mainartikel">
+     {{question.text}}
+  </div>
+   {%if question.image%}
+      <img src = "{{ question.image.url }}" width = 100% >
+   {%endif%}
+   {% if falsch %}
+   <span style="color:#FF0000"> Die Antwort war leider falsch </span>
+   {% endif%}
+   {% if richtig%}
+   <span style="color:#00a600"> Die Antwort ist richtig </span>
+   {%endif%}
+   {% if question.frage %}
+   {{question.frage}}
+   {%endif%}
+   <div style="padding = 30px 30px 30px 30px">
+   {%if singlechoice%}
+    {%for answer in answerlist%}
+       <div class="form-check">
+       <input class="form-check-input" type="radio" name="choice" value = "choice{{ forloop.counter }}" id="choice{{ forloop.counter }}">
+       <label class="form-check-label" for="defaultCheck1">
+       {{answer}}
+       </label>
+       </div>
+     {%endfor%}
+   {%else%}
+      {%for answer in answerlist%}
+        <div class="form-check">
+        <input class="form-check-input" name="choice" type="checkbox" value = "choice{{ forloop.counter }}"  id= "choice{{forloop.counter }}">
+        <label class="form-check-label" for="defaultCheck1">
+        {{answer}}
+        </label>
+        </div>
+      {%endfor%}
+    {%endif%}
+    </div>
+    {% if bildTestPath %}
+      {% if clicked %}
+        {% if clickrichtig %}
+          <span style="color:#00a600"> Die antwort ist richtig </span>
+        {%else%}
+          <span style="color:#FF0000"> Die Antwort war leider Falsch </span>
+        {%endif%}
+      {%endif %}
+      <br>
+        <a  href ="/ubung/{{ gleich}}">
+          {% load static %}
+          <img src="{% static "ubung/ohr.jpg" %}" alt="image" height = 200 ismap/>
+        </a>
+
+    {%endif%}
+
+
+    {%if answerlist %}
+    <input type = "submit" value = "Prüfen" >
+    {%endif%}
+
+</form>
+{% endblock %}

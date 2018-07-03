@@ -1,0 +1,34 @@
+<html>
+  <style>
+  .button {
+      background-color: #8c8c8c;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      font-size: 35px;
+  }
+  </style>
+  <head>
+    <title>
+      HNO-Lernprogramm
+    </title>
+  </head>
+  <body>
+    <div style="text-align:center">
+      <a  href ="/lernen">
+        {% load static %}
+        <img src="{% static "ubung/hno_start_logo.jpg" %}" alt="My image" style="width:1000px;height:1000px;"/>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top: 60px;">
+      <a href="/lernen/{{ ersteSeite }}" class = "button"> START </a>
+    </div>
+  </body>
+
+</html>

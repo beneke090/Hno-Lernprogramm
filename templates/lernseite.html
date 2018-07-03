@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %} Lernen {% endblock %}
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+
+@media screen and (max-height: 450px){
+  .vert {padding-top:15px;}
+  .vert {padding-right: 150px;}
+  .vert a {font-size:18px;}
+}
+ {%if imglist%}
+ {%if art.unten == False%}
+.mainartikel {
+  margin-right: 600px;
+  text-align: justify;
+}
+{%endif%}
+{%endif%}
+.bilder {
+  width : 600px;
+  position : absolute;
+  right:10px ;
+  top:100;
+  padding-top: 20px;
+
+}
+
+.bild {
+  width: 580px;
+  padding: 10px 10px 10px 10px;
+}
+.bilderunten {
+  right:50px ;
+  left:300px ;
+
+  padding-top: 20px;
+
+}
+
+
+</style>
+
+
+
+   <h1>  {{ art.title }} </h1>
+   {% if art.unterschrift %}
+   <h2>  {{ art.unterschrift }} </h2>
+   {%endif%}
+   {%if art.unten == False %}
+   {%if imglist%}
+       <div class ="bilder">
+           {%for image in imglist%}
+               <img class = "bild" src = "{{ image.url }}" >
+           {%endfor%}
+        </div>
+   {%endif%}
+   {%endif%}
+   <div class = "mainartikel">
+     {{ art.text|linebreaks }}
+   </div>
+   {%if art.unten%}
+    <div class ="bilderunten">
+        {%for image in imglist%}
+            <img class = "bildunten" src = "{{ image.url }}" align ="left" >
+        {%endfor%}
+     </div>
+  {%endif%}
+  {% if videolink %}
+    <iframe width="1120" height="630" src="{{videolink}}" frameborder="0"
+      allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+  {%endif%}
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
+{% endblock %}

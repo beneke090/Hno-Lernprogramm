@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    document.addEventListener("keyup",function(e){
+       var key = e.which||e.keyCode;
+       switch(key){
+          //left arrow
+          case 37:
+             document.getElementById("prevLink").click();
+          break;
+          //right arrow
+          case 39:
+             document.getElementById("nextLink").click();
+          break;
+       }
+    });
+    </script>
+</head>
+<style>
+
+.active {
+  color:#064579;
+  background: #00D6D6;
+}
+.vert {
+    width: 270px;
+    position:fixed;
+    z-index: 1;
+    top: 150px;
+    left: 10 px;
+    background: #00ffff;
+    overflow-x: hidden;
+    padding: 8px 0;
+    font-size: 35px;
+}
+
+.vert a {
+  padding: 12px 12px 20px 20px;
+  text-decoration: none;
+  color: #2196F3;
+  display:block;
+}
+
+.vert a:hover {
+  color:#064579;
+  background: #00e6e6;
+}
+
+.horiz {
+    list-style-type: none;
+    margin: 0;
+    margin-left :0;
+    padding: 100;
+    overflow: hidden;
+    background-color: #333;
+    left: 100px;
+    font-size: 35px;
+    height:140px;
+}
+
+li {
+    border-right: 1px solid #bbb;
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 50px 80px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.untertitel{
+    background-color: #00FFB2;
+    font-size: 10px;
+    margin: 0px 0px;
+}
+.untertitel:hover {
+    background-color: #F0FFFA;
+}
+.untertitelactive{
+    background-color: #00D695;
+    font-size: 10px;
+}
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.main {
+  margin-left: 280px;
+  font-size: 35px;
+
+}
+
+</style>
+<body>
+  <ul class = "horiz">
+    {% load static %}
+    <li><img src="{% static "ubung/hno_Logo.png" %}" alt="My image" style="width:128px;height:128px;"></li>
+    <li><a href="/lernen/">Lehrbuch</a></li>
+    <li><a href="/ubung/">Übungen</a></li>
+    <li><a href="contact.asp">Test</a></li>
+  </ul>
+
+
+  <div class = "vert">
+    {% for kapitel, link in kapitelliste %}
+        {% if kapitel == active %}
+            <a class = "active" href="{{link}}">{{kapitel}}</a>
+            {% for title, link in samekapitelarticle %}
+                {% if title == activetitle%}
+                    <a class = "untertitelactive" href={{link}}> -> {{title}} </a>
+                {% else %}
+                    <a class = "untertitel" href={{link}}> -> {{title}} </a>
+                {%endif%}
+            {%endfor%}
+        {%else%}
+            <a href="{{link}}">{{kapitel}}</a>
+        {%endif%}
+
+
+
+    {%endfor%}
+  </div>
+  <div class ="main">
+    {% block content %}{% endblock %}
+    {% if zuruck %}
+       <a id = "prevLink" href="{{ zuruck }}" class = "button"> Zurück </a>
+    {% endif %}
+    {% if naechst %}
+    <a id = "nextLink" href="{{ naechst }}" class = "button"> Weiter </a>
+    {% endif %}
+  </div>
+</body>
+</html>
