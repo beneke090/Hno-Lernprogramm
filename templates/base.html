@@ -29,19 +29,18 @@
   background: #00D6D6;
 }
 .vert {
-    width: 270px;
+    width: 140px;
     position:fixed;
     z-index: 1;
-    top: 150px;
+    top: 60px;
     left: 10 px;
     background: #00ffff;
     overflow-x: hidden;
-    padding: 8px 0;
-    font-size: 35px;
+    font-size: 20px;
 }
 
 .vert a {
-  padding: 12px 12px 20px 20px;
+  padding: 5px 5px 5px 5px;
   text-decoration: none;
   color: #2196F3;
   display:block;
@@ -56,12 +55,12 @@
     list-style-type: none;
     margin: 0;
     margin-left :0;
-    padding: 100;
+    padding: 20;
     overflow: hidden;
     background-color: #333;
     left: 100px;
-    font-size: 35px;
-    height:140px;
+    font-size: 20px;
+    height:55px;
 }
 
 li {
@@ -69,17 +68,6 @@ li {
     float: left;
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 50px 80px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111;
-}
 
 .untertitel{
     background-color: #00FFB2;
@@ -107,22 +95,38 @@ li a:hover {
 }
 
 .main {
-  margin-left: 280px;
-  font-size: 35px;
+  margin-left: 150px;
+  font-size: 16px;
+  padding-bottom:70px;
 
 }
+#mybutton {
+  position: fixed;
+  bottom: -4px;
+  right: 10px;
+}
+
+footer {
+    position: fixed;
+    height: 40px;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(230,230,230,0.6);
+}
+
 
 </style>
 <body>
-  <ul class = "horiz">
+  <div class="container-fluid">
+  <ul class = "horiz nav">
     {% load static %}
-    <li><img src="{% static "ubung/hno_Logo.png" %}" alt="My image" style="width:128px;height:128px;"></li>
-    <li><a href="/lernen/">Blockpraktikum</a></li>
+    <li><img src="{% static "ubung/hno_Logo.png" %}" alt="My image" style="width:45px;height:45px;"></li>
+    <li><a href="/lernen/">Blockpraktium</a></li>
     <li><a href="/ubung/">Übungen</a></li>
     <li><a href="contact.asp">Test</a></li>
   </ul>
-
-
+</div>
+  <div class="container-fluid">
   <div class = "vert">
     {% for kapitel, link in kapitelliste %}
         {% if kapitel == active %}
@@ -142,14 +146,19 @@ li a:hover {
 
     {%endfor%}
   </div>
+  </div>
+  <div class="container">
   <div class ="main">
     {% block content %}{% endblock %}
+    <footer class="bg-white fixed-bottom">
     {% if zuruck %}
-       <a id = "prevLink" href="{{ zuruck }}" class = "button"> Zurück </a>
+       <a id = "prevLink" href="{{ zuruck }}" class = "btn btn-info" style ="margin-top:2px; margin-left:5px;"> Zurück </a>
     {% endif %}
     {% if naechst %}
-    <a id = "nextLink" href="{{ naechst }}" class = "button"> Weiter </a>
+    <a id = "nextLink" href="{{ naechst }}" class = "btn btn-info" style ="margin-top:2px;"> Weiter </a>
     {% endif %}
+  </footer>
+  </div>
   </div>
 </body>
 </html>
