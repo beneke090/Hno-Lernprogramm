@@ -22,7 +22,7 @@ from supuser.views import supauser
 from django.conf import settings
 from django.views.static import serve
 import object_tools
-from django.contrib.auth.views import login
+from django.contrib.auth.views import login, logout
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,7 +32,8 @@ urlpatterns = [
     url(r'^lernen/', article),
     url(r'^ubung/', ubungTest),
     url(r'^login/$', login, {'template_name': 'login.html'}),
-    url(r'^login/superuser/', supauser),
+    url(r'^logout/$', logout, {'template_name': 'logout.html'}),
+    url(r'^superuser/', supauser),
 ]
 
 if settings.DEBUG:

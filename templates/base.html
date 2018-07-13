@@ -51,17 +51,7 @@
   background: #00e6e6;
 }
 
-.horiz {
-    list-style-type: none;
-    margin: 0;
-    margin-left :0;
-    padding: 20;
-    overflow: hidden;
-    background-color: #333;
-    left: 100px;
-    font-size: 20px;
-    height:55px;
-}
+
 
 li {
     border-right: 1px solid #bbb;
@@ -106,26 +96,32 @@ li {
   right: 10px;
 }
 
-footer {
-    position: fixed;
-    height: 40px;
-    bottom: 0;
-    width: 100%;
+.navbar {
     background-color: rgba(230,230,230,0.6);
 }
 
 
 </style>
 <body>
-  <div class="container-fluid">
-  <ul class = "horiz nav">
+
+  <nav class="navbar" style = "background-color: rgba(230,230,230,0.6)">
+  <ul class = "nav navbar-nav">
     {% load static %}
-    <li><a href = "/"> <img src="{% static "ubung/hno_Logo.png" %}" alt="My image" style="width:45px;height:45px;"></a></li>
+    <li><a href = "/"> <img src="{% static "ubung/hno_Logo.png" %}" alt="My image" style="width:40px;height:40px;"></a></li>
     <li><a href="/lernen/">Blockpraktium</a></li>
     <li><a href="/ubung/">Übungen</a></li>
     <li><a href="#">Test</a></li>
   </ul>
-</div>
+  <ul class ="nav navbar-nav navbar-right">
+    {% if logged_in %}
+    <li><a href="/logout">Logout</a></li>
+    {% else %}
+    <li><a href="/login">Login</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+
   <div class="container-fluid">
   <div class = "vert">
     {% for kapitel, link in kapitelliste %}
