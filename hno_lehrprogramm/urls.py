@@ -18,9 +18,11 @@ from django.contrib import admin
 from hno_lehrprogramm.views import start
 from ubung.views import showbild, ubungTest
 from lernen.views import article
+from supuser.views import supauser
 from django.conf import settings
 from django.views.static import serve
 import object_tools
+from django.contrib.auth.views import login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,7 +31,9 @@ urlpatterns = [
     url(r'^bild/$', showbild),
     url(r'^lernen/', article),
     url(r'^ubung/', ubungTest),
+    url(r'^login/$', login, {'template_name': 'login.html'}),
+    url(r'^login/superuser/', supauser),
 ]
 
 if settings.DEBUG:
-    urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),]
+    urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, }), ]
