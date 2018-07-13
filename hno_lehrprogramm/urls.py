@@ -18,7 +18,7 @@ from django.contrib import admin
 from hno_lehrprogramm.views import start
 from ubung.views import showbild, ubungTest
 from lernen.views import article
-from supuser.views import supauser
+from supuser.views import supauser, newarticle
 from django.conf import settings
 from django.views.static import serve
 import object_tools
@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}),
     url(r'^logout/$', logout, {'template_name': 'logout.html'}),
     url(r'^superuser/', supauser),
+    url(r'^newarticle/$', newarticle),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} Lernen {% endblock %}
+{% block content %}
+    <h1> Hallo on the Admin seite </h1>
+    <p> {{test}} </p>
+    <form action="" method="post" novalidate>
+    <table>
+      {{ form.media }}
+      {{ form.as_p }}
+    </table>
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

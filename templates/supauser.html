@@ -1,23 +1,11 @@
-<html>
-  <head>
-    <title>
-      HNO-Lernprogramm
-    </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script>window.CKEDITOR_BASEPATH = '/static_root/ckeditor/ckeditor/';</script>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block title %} Lernen {% endblock %}
+{% block content %}
     <h1> Hallo on the Admin seite </h1>
-    <p> {{test}} </p>
-    <form action="" method="post" novalidate>
-    <table>
-      {{ form.media }}
-      {{ form.as_p }}
-    </table>
-    {% csrf_token %}
-    <input type="submit" value="Submit">
-</form>
-{% load static %}
-  </body>
+    {% if logged_in %}
+    <p> Sie sind jetzt angemeldet </p>
+    {% else %}
+    <p> Problem !!! </p>
+    {%endif%}
 
-</html>
+{% endblock %}

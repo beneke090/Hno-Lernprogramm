@@ -48,23 +48,23 @@ def ubungTest(request):
             kapitelliste.append(str(ubung.kapitel))
             linkliste.append("/ubung/"+str(ubung.uberschrift))
 
-    context = {"question": q,
-               "kapitelliste": zip(kapitelliste, linkliste),
-               "active": active,
-               }
+    c = {"question": q,
+         "kapitelliste": zip(kapitelliste, linkliste),
+         "active": active,
+         }
     try:
         naechst = Question.objects.get(my_order=q.my_order+1).uberschrift
-        context["naechst"] = "/ubung/"+naechst
+        c["naechst"] = "/ubung/"+naechst
     except:
         pass
     try:
         zuruck = Question.objects.get(my_order=q.my_order-1).uberschrift
-        context["zuruck"] = "/ubung/"+zuruck
+        c["zuruck"] = "/ubung/"+zuruck
     except:
         pass
 
     gleich = q.uberschrift
-    context["gleich"] = gleich
+    c["gleich"] = gleich
     if len(q.answer_set.all()) != 0:
         answers = {}
         answernumm = []
@@ -76,8 +76,8 @@ def ubungTest(request):
 
         answerlist = answers.keys()
         if len(q.answer_set.filter(richtig=True)) < 2:
-            context["singlechoice"] = "singlechoice"
-        context["answerlist"] = answerlist
+            c["singlechoice"] = "singlechoice"
+        c["answerlist"] = answerlist
     elif q.coordinates != "":
         if request.method == "GET":
             if bool(request.GET.dict()):
@@ -96,9 +96,9 @@ def ubungTest(request):
                 context["clickrichtig"] = clickrichtig
 
         bildTestPath = "ubung/"+q.image
-        context["bildTestPath"] = bildTestPath
+        c["bildTestPath"] = bildTestPath
     if request.user.is_authenticated():
-        context["logged_in"] = True
+        c["logged_in"] = True
     print(request.GET.getlist("choice"))
     try:
         givennum = []
@@ -116,8 +116,8 @@ def ubungTest(request):
                     richtigListe.append(False)
 
             print(richtigListe)
-            context["richtig"] = not False in richtigListe
-            context["falsch"] = False in richtigListe
+            c["richtig"] = not False in richtigListe
+            c["falsch"] = False in richtigListe
         else:
             print("emppy")
             pass
@@ -129,5 +129,5 @@ def ubungTest(request):
         #     widget = forms.RadioSelect(answerneu)
         # form = UserForm
         # context["form"] = form
-    html = t.render(context)
+    html = t.render(c)
     return HttpResponse(html)
